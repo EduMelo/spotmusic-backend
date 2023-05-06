@@ -1,5 +1,6 @@
 import os
 import pymysql
+import logging
 from flask import jsonify
 
 db_user = os.environ.get('CLOUD_SQL_USERNAME')
@@ -9,8 +10,8 @@ db_local_host = os.environ.get('DB_LOCAL_HOST')
 db_connection_name = os.environ.get('CLOUD_SQL_CONNECTION_NAME')
 
 def open_connection():
-    print('DATABASE:');
-    print(db_local_host);
+    logging.error('DATABASE:');
+    logging.error(db_local_host);
     try:
         if db_connection_name:
             unix_socket = '/cloudsql/{}'.format(db_connection_name)
@@ -25,7 +26,7 @@ def open_connection():
                                 host=db_local_host, db=db_name,cursorclass=pymysql.cursors.DictCursor)
 
     except pymysql.MySQLError as e:
-        print(e)
+        logging.error(e)
 
     return conn
 
