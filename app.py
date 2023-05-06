@@ -10,8 +10,7 @@ csrf = CSRFProtect(app)
 
 @app.route('/')
 def songs():
-    return "Teste"
-    # return get_songs()    
+    return get_songs()    
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
